@@ -16,7 +16,7 @@ class MigrateRootToken
   do: (request, callback) =>
     { uuid, token } = request.metadata.auth
 
-    @tokenManager.storeToken { uuid, token }, (error) =>
+    @tokenManager.storeToken { uuid, token, root: true }, (error) =>
       return callback error if error?
       return @_doCallback request, 204, callback
 

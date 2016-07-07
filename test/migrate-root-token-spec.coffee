@@ -40,8 +40,14 @@ describe 'MigrateRootToken', ->
 
         expect(@response).to.deep.equal expectedResponse
 
-      it 'should exist in the database', (done) ->
+      it 'should be a valid token', (done) ->
         @tokenManager.verifyToken { uuid: 'some-uuid', token: 'some-token' }, (error, valid) =>
           return done error if error?
           expect(valid).to.be.true
+          done()
+
+      it 'should have root: true in the database', (done) ->
+        @datastore.findOne { uuid: 'some-uuid' }, (error, record) =>
+          return done error if error?
+          expect(record.root).to.be.true
           done()
