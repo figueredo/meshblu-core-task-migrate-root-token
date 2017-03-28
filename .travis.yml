@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- '5'
+- '7'
 env:
 - CXX=g++-4.8
 services:
@@ -11,18 +11,6 @@ addons:
     - ubuntu-toolchain-r-test
     packages:
     - g++-4.8
-before_script:
-- npm install -g codeclimate-test-reporter
-after_script:
-- codeclimate-test-reporter < coverage/lcov.info
-deploy:
-  provider: npm
-  email: serveradmin@octoblu.com
-  api_key:
-    secure: FSNK9CNWkL2K/BCmnBAGYPE6wp4FkXFZbN6oNtz8RibddCIYsVKFSfXe6lGEjiNnubpsHnoX7SgLnE2lWn5uWq7T4pf1OgLEp4sGQpzkKRpgDth45KMnM1XnxIgh1pCqPCffT1MfQ7ofBTLqaccqy5E8iW8j8NAOqYIrRCcp5r1+FPfQAdAgt7SRRPY1IU1P/yIpeHgXeQmnxbwvUNYAy01bY63WE2nvhxgnWd+y+6A9D8ITg5LtLIS7yG9innAYs+cb1YmfmzfyG7s3zW1B/j8kViyU3Qd7n4b2b5vreK6ggm82+YsGgBoSVglNrNT4jz8YZZAJ2gELEMQrsTdW4tFBRigB9NUPPuG3ycJlSaLTKDAp6gN4V2NuNgu3fidcQiLIU+yc8M6EL2lgdvAjQ/wgSrS4YPlJm/WbjXpzboEDLGUp4WbshlmINAPBHd2GiQsJmKidJ2u7tI+ik4pUOrhfv0DROpsuz1/Tx2IFsSmuDhFiyuTx3N9rBtFcnnwg3z8K9qE5rwFUKWGGPl1JHk+ewGQBDwCtXvps47hRVdPyMsRWzGgKoxerslj7ytUo8jEjj+eZfQ/zsn2n9wy8hPCHXNp3O46LYbvaHBphveqfa7NXt7jVMFwBdxOaSU6RwgN7kXO/CXkwVTY3IG+Eb8fAcZuM1EQlUZC2BEjlsPo=
-  on:
-    tags: true
-    branches: true
 branches:
   only:
   - "/^v[0-9]/"
@@ -31,3 +19,11 @@ after_success:
 - npm run mocha:json
 - bash <(curl -s https://codecov.io/bash)
 - bash <(curl -s https://codecov.octoblu.com/bash)
+deploy:
+  provider: npm
+  email: serveradmin@octoblu.com
+  api_key:
+    secure: FSNK9CNWkL2K/BCmnBAGYPE6wp4FkXFZbN6oNtz8RibddCIYsVKFSfXe6lGEjiNnubpsHnoX7SgLnE2lWn5uWq7T4pf1OgLEp4sGQpzkKRpgDth45KMnM1XnxIgh1pCqPCffT1MfQ7ofBTLqaccqy5E8iW8j8NAOqYIrRCcp5r1+FPfQAdAgt7SRRPY1IU1P/yIpeHgXeQmnxbwvUNYAy01bY63WE2nvhxgnWd+y+6A9D8ITg5LtLIS7yG9innAYs+cb1YmfmzfyG7s3zW1B/j8kViyU3Qd7n4b2b5vreK6ggm82+YsGgBoSVglNrNT4jz8YZZAJ2gELEMQrsTdW4tFBRigB9NUPPuG3ycJlSaLTKDAp6gN4V2NuNgu3fidcQiLIU+yc8M6EL2lgdvAjQ/wgSrS4YPlJm/WbjXpzboEDLGUp4WbshlmINAPBHd2GiQsJmKidJ2u7tI+ik4pUOrhfv0DROpsuz1/Tx2IFsSmuDhFiyuTx3N9rBtFcnnwg3z8K9qE5rwFUKWGGPl1JHk+ewGQBDwCtXvps47hRVdPyMsRWzGgKoxerslj7ytUo8jEjj+eZfQ/zsn2n9wy8hPCHXNp3O46LYbvaHBphveqfa7NXt7jVMFwBdxOaSU6RwgN7kXO/CXkwVTY3IG+Eb8fAcZuM1EQlUZC2BEjlsPo=
+  on:
+    tags: true
+    branches: true
